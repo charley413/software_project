@@ -1,0 +1,42 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    
+ 
+    <style type="text/css">
+        body {
+            text-align: center;
+            
+        }
+    </style>
+</head>
+{%if datas.count()>0%}   <!--게시물이 존재-->
+<table style="width:50%">
+<thead>
+<tr>
+<td>번호</td>
+<td>제목</td>
+<td>날짜</td>
+</tr>
+</thead>
+<tbody>
+<!--반복시작-->
+{% for data in datas %}
+<tr>
+<td> {{loop.index}}</td> <!--1부터 시작하여 loop돌면서 번호 출력-->
+<td><a href="{{url_for('board_view',idx=data._id)}}">{{data.title}}</a></td><!--주소를 받아서 태그 설정-->
+<td> {{data.pubdate|format}}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+{% else %}
+<h2>작성한 다이어리가 없습니다.</h2>
+{% endif %}
+
+<a href="{{url_for('board_write')}}"> 다이어리 작성하기</a> 
+<a href="{{url_for('login')}}"> 로그아웃하기</a> 
